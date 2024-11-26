@@ -1,1 +1,1 @@
-# trashy_chess_engine
+Trying to build a chess engine from scratch using reinforcement learning.
