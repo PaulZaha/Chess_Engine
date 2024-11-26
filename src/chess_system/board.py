@@ -40,6 +40,7 @@ class ChessBoard():
         self.move = ChessBoard.move
 
     def get_current_board(self):
+        print(self.board)
         return self.board
 
     def notation_to_index(self, move):
@@ -71,13 +72,17 @@ class ChessBoard():
         cur_piece = self.board[startrow,startcol]
         print(cur_piece)
 
+        self.board[endrow,endcol] = cur_piece
+        self.board[startrow,startcol] = 0
 
     def make_pawn_move(self):
         self.board
 
 def main():
     board = ChessBoard()
-    board.make_move('a2a4')
+    board.get_current_board()
+    board.make_move('e2e4')
+    board.get_current_board()
     
     
 
