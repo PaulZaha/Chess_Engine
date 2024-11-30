@@ -1,26 +1,42 @@
 
 import numpy as np
+from model import ChessNetwork
 
-from model import Network
-from layering.fc_layer import FCLayer
-from layering.activation import ActivationLayer
-from activation_funcs import tanh, tanh_prime
-from loss_funcs import mse, mse_prime
 
 # training data
-x_train = np.array([[[0,0]], [[0,1]], [[1,0]], [[1,1]]])
-y_train = np.array([[[0]], [[1]], [[1]], [[0]]])
+x_train = np.array([
+    [
+            [-2,-3,-4,-5,-6,-4,-3,-2],
+            [-1,-1,-1,-1,-1,-1,-1,-1],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0],
+            [1,1,1,1,1,1,1,1],
+            [2,3,4,5,6,4,3,2]
+        ]
+    ])
+
+
+#tbd: zahlen skalieren auf 0-1
+"""
+Am Ende brauchen wir statt einer Activation Function einen Classifier.
+Nach dem Input des Board müssen aus der chessenvironment alle möglichen Züge berechnet werden.
+Dann soll eine Map zwischen dem Input-Board und allen legalen Moves erstellt werden -> get best moves :)
+Dieser soll für jeden möglichen Schachzug einen Wert zwischen 0 und 1 ausgeben
+"""
+
+y_train = np.array([0])
 
 # network
-net = Network()
-net.add(FCLayer(2, 3))
-net.add(ActivationLayer(tanh, tanh_prime))
-net.add(FCLayer(3, 1))
-net.add(ActivationLayer(tanh, tanh_prime))
 
+net = ChessNetwork()
+
+#configure
+net.configure(activation_function='tanh',loss_function='mse')
+print("start fitting")
 # train
-net.use(mse, mse_prime)
-net.fit(x_train, y_train, epochs=1000, learning_rate=0.1)
+net.fit(x_train, y_train, epochs=10, learning_rate=0.1)
 
 # test
 out = net.predict(x_train)
