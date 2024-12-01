@@ -8,9 +8,11 @@ class FCLayer(Layer):
     Args:
         Layer (_type_): _description_
     """
+    np.random.seed(42)
     def __init__(self,input_size,output_size):
-        self.weights = np.random.rand(input_size,output_size) - 0.5
-        self.bias = np.random.rand(1,output_size) - 0.5
+        self.weights = np.random.randn(input_size, output_size) * np.sqrt(2. / input_size)
+        self.bias = np.zeros((1, output_size))
+
     
     def forward_propagation(self, input_data):
         self.input_data = input_data
@@ -30,5 +32,4 @@ class FCLayer(Layer):
         # Update the weights and biases using the gradients
         self.weights -= learning_rate * weights_error
         self.bias -= learning_rate * bias_error
-
         return input_error
