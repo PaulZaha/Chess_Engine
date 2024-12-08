@@ -21,3 +21,12 @@ def sigmoid(x):
 
 def sigmoid_backprop(x):
     return sigmoid(x) * (1-x)
+
+
+def relu(x):
+    return np.maximum(0, x)
+
+def relu_backprop(x):
+    # Ableitung der ReLU-Funktion
+    # Sie gibt 1 zurück, wenn x > 0, andernfalls 0
+    return (x > 0).astype(float)

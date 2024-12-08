@@ -8,7 +8,7 @@ class FCLayer(Layer):
     Args:
         Layer (_type_): _description_
     """
-    np.random.seed(42)
+    # np.random.seed(44)
     def __init__(self,input_size,output_size):
         self.weights = np.random.randn(input_size, output_size) * np.sqrt(2. / input_size)
         self.bias = np.zeros((1, output_size))
